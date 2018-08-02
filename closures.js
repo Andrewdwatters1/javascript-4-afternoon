@@ -1,11 +1,3 @@
-/* 
-  Once you complete a problem, refresh ./closures.html in your browser and check to see if the problem's test(s) are passing.
-  Passed tests will be indicated by a green circle.
-  Failed tests will be indicated by a red X.
-
-  You can refresh the page at any time to re-run all the tests.
-*/
-
 ////////// PROBLEM 1 //////////
 
 // Do not edit the code below.
@@ -22,15 +14,11 @@ function outer() {
   Invoke outer saving the return value into another variable called 'inner'.
 */
   
-// Code Here
-
-
+let inner = outer();
 
 //Once you do that, invoke inner.
 
-//Code Here
-
-
+inner();
 
 ////////// PROBLEM 2 //////////
 
@@ -51,9 +39,8 @@ function callFriend(name) {
   (HINT: You will need to pass in arguments to both function invocations)
 */
 
-//Code Here
-
-
+let callJake = callFriend('Jake');
+callJake('435-555-9248');
 
 ////////// PROBLEM 3 //////////
 
@@ -61,18 +48,20 @@ function callFriend(name) {
   Write a function called makeCounter that makes the following code work properly.
 */
 
-//Code Here
-
-
+function makeCounter() {
+  let count = 0;
+  return function() {
+    count++
+    return count;
+  }
+}
 
 //Uncomment this once you make your function
-//   var count = makeCounter();
-//   count(); // 1
-//   count(); // 2
-//   count(); // 3
-//   count(); // 4
-
-
+  var count = makeCounter();
+  count(); // 1
+  count(); // 2
+  count(); // 3
+  count(); // 4
 
 ////////// PROBLEM 4 //////////
 
@@ -86,20 +75,27 @@ function callFriend(name) {
 */
 
 function counterFactory(value) {
-  // Code here.
+  function inc() {
+    value++;
+    return value;
+  }
+
+  function dec() {
+    value--;
+    return value;
+  }
 
   return {
-
+    inc,
+    dec
   };
 }
 
 counter = counterFactory(10);
-// counter.inc() // 11
-// counter.inc() // 12
-// counter.inc() // 13
-// counter.dec() // 12
-
-
+counter.inc() // 11
+counter.inc() // 12
+counter.inc() // 13
+counter.dec() // 12
 
 ////////// PROBLEM 5 //////////
 
@@ -112,15 +108,15 @@ counter = counterFactory(10);
 function motivation( firstname, lastname ) {
   var welcomeText = "You're doing awesome, keep it up";
 
-  // code message function here.
+  function message() {
+    return welcomeText + " " + firstname + " " + lastname + ".";
+  }
 
   //Uncommment this to return the value of your message function
-  //return message;
+  return message;
 }
 
 var greeting = motivation('Billy', 'Bob'); // 'You're doing awesome keep it up Billy Bob.
-
-
 
 ////////// PROBLEM 6 //////////
 
@@ -143,11 +139,13 @@ var module = (function() {
   // Anything that is being returned is made public and can be invoked from
   // outside our lexical scope
   return {
-    // Code here.
+    publicMethod: function() {
+      return privateMethod()
+    }
   };
 })();
 
-
+module.publicMethod();
 
 ////////// PROBLEM 7 //////////
 
@@ -162,11 +160,14 @@ function secretNumber() {
   var secret = 143;
 
   return {
-    // Code here
+    addToSecret: function(num) {
+      return secret += num;
+    },
+    takeAwayFromSecret: function(num) {
+      return secret -= num;
+    }
   };
 }
-
-
 
 ////////// PROBLEM 8 //////////
   
@@ -188,9 +189,10 @@ function secretNumber() {
 
 function timeOutCounter() {
   for (var i = 0; i <= 5; i++) {
+    let ind = i;
     setTimeout(function() {
-      console.log(i);
-    }, i * 1000);
+      console.log(ind);
+    }, ind * 1000);
   }
 }
 timeOutCounter();
